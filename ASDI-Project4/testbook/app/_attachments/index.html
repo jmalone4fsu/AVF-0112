@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--Mobile viewport optimized:j.imp/bplateviewport-->
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Mobile IE needs cleartype for smoothing fonts-->
+    <meta http-equiv="cleartype" content="on">
+    <title>Santa's Helper</title>
+    <link rel="stylesheet" href="jquery.mobile-1.0b3.css" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+    <script src="/_utils/script/jquery.couch.js?0.9.0"></script>
+  </head>
+  <body>
+      <div data-role="page" id="home" data-cache="never" data-theme="e">
+            <div data-role="header" data-position="fixed" data-theme="f">
+            <h1>Stay Organized This Year!</h1>
+        </div>
+        <div data-role="content" align="center">
+            <ul data-role="listview" data-inset="true">
+                <p align=center><img src="title3.png" width=90%></p>
+            </ul>
+            <ul data-role="listview" data-inset="true">
+                <p><a href="#addgift" data-theme="c" data-transition="flip"><img src="additem.png" width=70%></a></p>
+            </ul>
+            <ul data-role="listview" data-inset="true">
+                
+                <p><a href="#asdi3" data-theme="c" data-transition="flip"><img src="nicelist.png" width=80%></a></p>
+            </ul>
+        
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="f">
+            <center><p>&copy; 2011 - JMalone - All rights reserved</p></center>
+        </div>
+      </div>
+      
+      <div data-role="page" id="addgift" data-theme="e">
+            <div data-role="header" data-position="fixed" data-theme="f">
+                <h1 id="Addagift">Add a gift to Santa's list</h1>
+                <a href="#home" data-type="button" data-icon="home" class="ui-btn-left" data-theme="c">Home</a>
+                
+                <a href="#" data-type="reset" data-icon="refresh" class="ui-btn-right" data-theme="c" onclick="window.location.reload()">Reset</a>
+            </div>
+            <div data-role="content" align="center">
+                <ul data-role="listview" data-inset="true">
+                    <p align=center><img src="additem.png" width=35%></p>
+                    <div id="add"><button type="button" id="add">Add</button></div>
+                </ul>
+           </div> 
+      </div>
+      
+      <div data-role="page" id="asdi3" data-cache='never' data-theme="e">
+            <div data-role="header" data-position="fixed" data-theme="f">
+                <h1 id="santasnicelist">Are you Naught or Nice?</h1>
+                <a href="#home" data-type="button" data-icon="home" class="ui-btn-left" data-theme="c">Home</a>
+                <a href="#addgift" data-type="button" data-icon="plus" class="ui-btn-right" data-theme="c">Add More</a>
+            </div>
+            <div data-role="content" align="center">
+                <ul data-role="listview" data-inset="true">
+                    <p align=center><img src="nicelist.png" width=90%></p>
+                </ul>
+                <div data-role="collapsible-set">
+                    <div data-role="collapsible" data-collapsed="true" data-theme="c">
+                        <h3>Stocking Stuffers</h3>
+                        <ul id="stuffit" data-role="listview" data-inset="true" data-theme="g">
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="true" data-theme="c">
+                        <h3>Holiday Dinner</h3>
+                        <ul id="dinnerlist" data-role="listview" data-inset="true" data-theme="g">
+                        </ul>
+                    </div>
+                    <div data-role="collapsible" data-collapsed="false" data-theme="c">
+                        <h3>Santa's Gift List</h3>
+                        <ul id="nicelist" data-role="listview" data-inset="true" data-theme="g">
+                        </ul>
+                    </div>
+                </div>
+           </div> 
+      </div>
+      <script src="jquery.json-2.2.min.js"></script>
+      <script type="text/javascript">
+      $db = $.couch.db("addressbook");
+      
+      
+      function refreshNicelist(){
+        $("#nicelist").empty();
+        $("#stuffit").empty();
+        $db.view("addressbook/nicelist", {
+          success: function(data){
+            for (i in data.rows) {
+              id = data.rows[i].id;
+              name = data.rows[i].key;
+              values = data.rows[i].value;
+              gift = values.item;
+              bought = values.bought;
+              cat = values.cat;
+              if (cat === "gift") {
+            		  html = '<li>' +
+            		  '<h2 class="name"> Gift For : ' + name + '</h2>' +
+            		  '<p class="gift"> Gift : ' + gift + '</p>'+
+            		  '<p class="bought"> Bought? : ' + bought + '</p>' +
+            		  '<p class="cat"> CAT : ' + cat + '</p>' +
+            		  '<p><a href="#" id="' +id +'" class="edit">Edit</a></p>' +
+            		  '<p><a href="#" id="' +id +'" class="delete">Delete</a></p></li>';
+            		  $("#nicelist").append(html);
+              }
+              else if (cat === "stocking") {
+            	       html = '<li>' +
+            	       '<h2 class="name"> Gift For : ' + name + '</h2>' +
+            	       '<p class="gift"> Gift : ' + gift + '</p>'+
+            	       '<p class="bought"> Bought? : ' + bought + '</p>' +
+            	       '<p class="cat"> CAT : ' + cat + '</p>' +
+            	       '<p><a href="#" id="' +id +'" class="edit">Edit</a></p>' +
+            	       '<p><a href="#" id="' +id +'" class="delete">Delete</a></p></li>';
+            	       $("#stuffit").append(html);  
+              }
+              else if (cat === "dinner") {
+                  html = '<li>' +
+                  '<h2 class="name">Dinner For : ' + name + '</h2>' +
+                  '<p class="gift"> Item : ' + gift + '</p>'+
+                  '<p class="bought"> Bought? : ' + bought + '</p>' +
+                  '<p class="cat"> CAT : ' + cat + '</p>' +
+                  '<p><a href="#" id="' +id +'" class="edit">Edit</a></p>' +
+                  '<p><a href="#" id="' +id +'" class="delete">Delete</a></p></li>';
+                  $("#dinnerlist").append(html);  
+              }
+            }
+            $("#nicelist").listview("refresh");
+            $("#stuffit").listview("refresh");
+            $("#dinnerlist").listview("refresh");
+          }
+        });
+      }
+      
+      function addUpdateForm(target, isDoc) {
+            html = '<form name="update" id="update" action=""><table>' +
+            '<tr><td>Catagory (gift/stocking/dinner)<input type="text" name="cat" id="cat" value="' +
+            (isDoc ? isDoc.cat : "" ) + '"></td></tr>' +
+            '<tr><td>Name</td><td>Item</td><td>Bought?</td></tr>' +
+            '<tr>' +
+            '<td><input type="text" name="name" id="name" value="' +
+            (isDoc ? isDoc.name : "" ) + '"></td>' +
+            '<td><input type="text" name="gift" id="gift" value="' +
+            (isDoc ? isDoc.gift : "") + '"></td>' +
+            '<td><input type="text" name="bought" id="bought" value="' +
+            (isDoc ? isDoc.bought : "") + '"></td>' +
+            '</tr><tr>' +
+            '<td><input type="submit" name="submit" class="update" value="' +
+            (isDoc ? "Update" : "Add") + '"></td>' +
+            '<td><input type="submit" name="cancel" class="cancel" value="Cancel"/></td>' +
+            '</tr>' +
+            '</table></form>';
+            target.append(html);
+            target.children("form#update").data("isDoc", isDoc);
+      }
+      
+      $(document).ready(function() {
+          refreshNicelist();
+
+        $("#nicelist").click(function(event) {
+          var $mytarget = $(event.target);
+          
+          if ($mytarget.is('a')) {
+            id = $mytarget.attr("id");
+            if ($mytarget.hasClass("edit")){
+              if ($mytarget.hasClass("edit")) {
+               $("button#add").show();
+               $("form#update").remove();
+               $db.openDoc(id, { success: function(doc) {
+               addUpdateForm($mytarget.parent(), doc);
+               }});
+              }
+            }
+            
+            if ($mytarget.hasClass("delete")){
+              html = '&nbsp;<span class="deleteconfirm">Sure? <a href="#" id="' + id + '" class="wannadelete">Yes</a> <a href="#" class="canceldelete">No</a></span>';
+              $mytarget.parent().append(html);
+            }
+            
+            if ($mytarget.hasClass("wannadelete")){
+              $db.openDoc(id, { success: function(doc) {
+                $db.removeDoc(doc, { success: function(){
+                  $mytarget.parents("div.address").remove();
+                  refreshNicelist();
+                }})
+              }});
+            }
+            
+            if ($mytarget.hasClass("canceldelete")) {
+              $mytarget.parents("span.deleteconfirm").remove();
+            }
+          }
+        });
+        $("#stuffit").click(function(event) {
+            var $mytarget = $(event.target);
+            
+            if ($mytarget.is('a')) {
+              id = $mytarget.attr("id");
+              if ($mytarget.hasClass("edit")){
+                if ($mytarget.hasClass("edit")) {
+                 $("button#add").show();
+                 $("form#update").remove();
+                 $db.openDoc(id, { success: function(doc) {
+                 addUpdateForm($mytarget.parent(), doc);
+                 }});
+                }
+              }
+              
+              if ($mytarget.hasClass("delete")){
+                html = '&nbsp;<span class="deleteconfirm">Sure? <a href="#" id="' + id + '" class="wannadelete">Yes</a> <a href="#" class="canceldelete">No</a></span>';
+                $mytarget.parent().append(html);
+              }
+              
+              if ($mytarget.hasClass("wannadelete")){
+                $db.openDoc(id, { success: function(doc) {
+                  $db.removeDoc(doc, { success: function(){
+                    $mytarget.parents("div.address").remove();
+                    refreshNicelist();
+                  }})
+                }});
+              }
+              
+              if ($mytarget.hasClass("canceldelete")) {
+                $mytarget.parents("span.deleteconfirm").remove();
+              }
+            }
+          });
+          $("#dinnerlist").click(function(event) {
+        	var $mytarget = $(event.target);
+            
+            if ($mytarget.is('a')) {
+              id = $mytarget.attr("id");
+              if ($mytarget.hasClass("edit")){
+                if ($mytarget.hasClass("edit")) {
+                 $("button#add").show();
+                 $("form#update").remove();
+                 $db.openDoc(id, { success: function(doc) {
+                 addUpdateForm($mytarget.parent(), doc);
+                 }});
+                }
+              }
+              
+              if ($mytarget.hasClass("delete")){
+                html = '&nbsp;<span class="deleteconfirm">Sure? <a href="#" id="' + id + '" class="wannadelete">Yes</a> <a href="#" class="canceldelete">No</a></span>';
+                $mytarget.parent().append(html);
+              }
+              
+              if ($mytarget.hasClass("wannadelete")){
+                $db.openDoc(id, { success: function(doc) {
+                  $db.removeDoc(doc, { success: function(){
+                    $mytarget.parents("div.address").remove();
+                    refreshNicelist();
+                  }})
+                }});
+              }
+              
+              if ($mytarget.hasClass("canceldelete")) {
+                $mytarget.parents("span.deleteconfirm").remove();
+              }
+            }
+          });
+        
+        $('div').live('pagehide', function(event, ui){
+            var page = $(event.target);
+
+            if(page.attr('data-cache') == 'never'){
+                window.location.reload();
+            };
+        });
+        
+        $("button#add").click(function(event) {
+               $("form#update").remove();
+               $("button#add").hide();
+               addUpdateForm($("div#add"));
+        });
+        $("input.cancel").live('click', function(event) {
+               $("button#add").show();
+               $("form#update").remove();
+               return false;
+        });
+        $("input.update").live('click', function(event) {
+               var $mytarget = $(event.target);
+               var $form = $mytarget.parents("form#update");
+               var $doc = $form.data('isDoc') || {};
+               $doc.type = "gift";
+               $doc.name = $form.find("input#name").val();
+               $doc.gift = $form.find("input#gift").val();
+               $doc.bought = $form.find("input#bought").val();
+               $doc.cat = $form.find("input#cat").val();
+               $db.saveDoc(
+                       $doc, { success: function(){
+                           $("button#add").show();
+                           $("form#update").remove();
+                           refreshNicelist();
+                           $.mobile.changePage( "#asdi3", "slidedown", true, true );
+                           }
+         });
+               return false;
+        })
+      });
+    </script>
+  </body>
+</html>

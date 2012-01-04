@@ -1,0 +1,10 @@
+{
+  "env": {
+    "local": {
+      "db": "http://127.0.0.1:5984/jmaloneasd"
+    },
+    "cloudant": {
+      "db": "https://teprearseentsidsherallat:7XF5I7GOfngEWaGi7pvftYwB@jmalone4fsu.cloudant.com/jmaloneasd"
+    }
+  }
+}

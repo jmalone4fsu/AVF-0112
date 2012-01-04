@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!--Mobile viewport optimized:j.imp/bplateviewport-->
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Mobile IE needs cleartype for smoothing fonts-->
+    <meta http-equiv="cleartype" content="on">
+    <title>Santa's Helper</title>
+    <link rel="stylesheet" href="jquery.mobile-1.0b3.css" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"></script>
+    <script src="/_utils/script/jquery.couch.js?0.9.0"></script>
+
+  </head>
+  <body>
+      <div data-role="page" id="home" data-cache="never" data-theme="e">
+            <div data-role="header" data-position="fixed" data-theme="f">
+            <h1>Stay Organized This Year!</h1>
+        </div>
+        <div data-role="content" align="center">
+            <ul data-role="listview" data-inset="true">
+                <p align=center><img src="title3.png" width=90%></p>
+            </ul>
+            <ul data-role="listview" data-inset="true">
+                <p><a href="#addgift" data-theme="c" data-transition="flip"><img src="additem.png" width=70%></a></p>
+            </ul>
+            <ul data-role="listview" data-inset="true">
+                <h2>Click Nice List to see Project 3</h2>
+                <p><a href="#asdi3" data-theme="c" data-transition="flip"><img src="nicelist.png" width=80%></a></p>
+            </ul>
+            <p><a href="#asdi3" data-role="button" data-icon="arrow-r"
+            data-iconpos="right" data-theme="g" data-transition="flip">Press for ASDI-1111 Project 4</a></p>
+        
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="f">
+            <center><p>&copy; 2011 - JMalone - All rights reserved</p></center>
+        </div>
+      </div>
+      
+      <div data-role="page" id="addgift" data-theme="e">
+            <div data-role="header" data-position="fixed" data-theme="f">
+                <h1 id="Addagift">Add a gift to Santa's list</h1>
+                <a href="#home" data-type="button" data-icon="home" class="ui-btn-left" data-theme="c">Home</a>
+                <a href="#" data-type="reset" data-icon="refresh" class="ui-btn-right" data-theme="c" onclick="window.location.reload()">Reset</a>
+            </div>
+            <div data-role="content" align="center">
+                <ul data-role="listview" data-inset="true">
+                    <p align=center><img src="additem.png" width=35%></p>
+                    <div id="add"><button type="button" id="add">Add</button></div>
+                </ul>
+           </div> 
+      </div>
+      
+      <div data-role="page" id="asdi3" data-cache='never' data-theme="e">
+            <div data-role="header" data-position="fixed" data-theme="f">
+                <h1 id="simple_address_book">Santa's Address Book</h1>
+                <a href="#home" data-type="button" data-icon="home" class="ui-btn-left" data-theme="c">Home</a>
+                <a href="#" data-type="reset" data-icon="refresh" class="ui-btn-right" data-theme="c" onclick="window.location.reload()">Reset</a>
+            </div>
+            <div data-role="content" align="center">
+                <ul data-role="listview" data-inset="true">
+                    <p align=center><img src="nicelist.png" width=90%></p>
+                </ul>
+                <div data-role="collapsible" data-collapsed="true" data-theme="c">
+                    <h3>Santa's Phonebook</h3>
+                    <ul id="nicelist" data-role="listview" data-inset="true" data-theme="g">
+                    </ul>
+                </div>
+           </div> 
+      </div>
+    <script src="jquery.json-2.2.min.js"></script>
+    <script type="text/javascript">
+    $db = $.couch.db("jmaloneasd");
+
+      
+      
+      function refreshNicelist(){
+        $("#nicelist").empty();
+        $db.view("jmaloneasd/everything", {
+          success: function(data){
+            for (i in data.rows) {
+              id = data.rows[i].id;
+              name = data.rows[i].key;
+              values = data.rows[i].value;
+              gift = values.gift;
+              desc = values.desc;
+              bought = values.bought;
+              wrapped = values.wrapped;
+              html = '<li>' +
+              '<h2 class="name"> Gift For : ' + name + '</h2>' +
+              '<p class="gift"> Gift : ' + gift + '</p>'+
+              '<p class="desc"> Note : ' + desc + '</p>' +
+              '<p class="bought"> Bought? : ' + bought + '</p>' + 
+              '<p class="wrapped"> Wrapped? : ' + wrapped + '</p>' +
+              '<p><a href="#" id="' +id +'" class="edit">Edit</a></p>' +
+              '<p><a href="#" id="' +id +'" class="delete">Delete</a></p></li>';
+              $("#nicelist").append(html);
+            }
+            $("#nicelist").listview("refresh");
+          }
+        });
+      }
+      
+      function addUpdateForm(target, existingDoc) {
+          html = '<form name="update" id="update" action=""><table>' +
+          '<tr><td>Name</td><td>Gift</td><td>Description</td></tr>' +
+          '<tr>' +
+          '<td><input type="text" name="name" id="name" value="' +
+          (existingDoc ? existingDoc.name : "" ) + '"></td>' +
+          '<td><input type="text" name="gift" id="gift" value="' +
+          (existingDoc ? existingDoc.gift : "") + '"></td>' +
+          '<td><input type="text" name="desc" id="desc" value="' +
+          (existingDoc ? existingDoc.desc : "") + '"></td></tr>' +
+          '<tr><td>Name</td><td>Gift</td><td>Description</td></tr>' +
+          '<tr>' +
+          '<td><input type="text" name="bought" id="bought" value="' +
+          (existingDoc ? existingDoc.bought : "") + '"></td>' +
+          '<td><input type="text" name="wrapped" id="wrapped" value="' +
+          (existingDoc ? existingDoc.wrapped : "") + '"></td>' +
+          '</tr><tr>' +
+          '<td><input type="submit" name="submit" class="update" value="' +
+          (existingDoc ? "Update" : "Add") + '"></td>' +
+          '<td><input type="submit" name="cancel" class="cancel" value="Cancel"/></td>' +
+          '</tr>' +
+          '</table></form>';
+          target.append(html);
+          target.children("form#update").data("existingDoc", existingDoc);
+    }
+      
+      $(document).ready(function() {
+          refreshNicelist();
+
+        $("#nicelist").click(function(event) {
+          var $tgt = $(event.target);
+          
+          if ($tgt.is('a')) {
+            id = $tgt.attr("id");
+            if ($tgt.hasClass("edit")){
+              if ($tgt.hasClass("edit")) {
+               $("button#add").show();
+               $("form#update").remove();
+               $db.openDoc(id, { success: function(doc) {
+               addUpdateForm($tgt.parent(), doc);
+               }});
+              }
+            }
+            
+            if ($tgt.hasClass("delete")){
+              html = '&nbsp;<span class="deleteconfirm">Sure? <a href="#" id="' + id + '" class="dodelete">Yes</a> <a href="#" class="canceldelete">No</a></span>';
+              $tgt.parent().append(html);
+            }
+            
+            if ($tgt.hasClass("dodelete")){
+              $db.openDoc(id, { success: function(doc) {
+                $db.removeDoc(doc, { success: function(){
+                  $tgt.parents("div.address").remove();
+                  refreshNicelist();
+                }})
+              }});
+            }
+            
+            if ($tgt.hasClass("canceldelete")) {
+              $tgt.parents("span.deleteconfirm").remove();
+            }
+          }
+        });
+        
+        $('div').live('pagehide', function(event, ui){
+            var page = $(event.target);
+
+            if(page.attr('data-cache') == 'never'){
+                window.location.reload();
+            };
+        });
+        
+        $("button#add").click(function(event) {
+               $("form#update").remove();
+               $("button#add").hide();
+               addUpdateForm($("div#add"));
+        });
+        $("input.cancel").live('click', function(event) {
+               $("button#add").show();
+               $("form#update").remove();
+               return false;
+        });
+        $("input.update").live('click', function(event) {
+               var $tgt = $(event.target);
+               var $form = $tgt.parents("form#update");
+               var $doc = $form.data('existingDoc') || {};
+               $doc.type = "all";
+               $doc.name = $form.find("input#name").val();
+               $doc.gift = $form.find("input#gift").val();
+               $doc.desc = $form.find("input#desc").val();
+               $doc.bought = $form.find("input#bought").val();
+               $doc.wrapped = $form.find("input#wrapped").val();
+               $db.saveDoc(
+                       $doc, { success: function(){
+                           $("button#add").show();
+                           $("form#update").remove();
+                           refreshNicelist();
+                           $.mobile.changePage( "#asdi3", "slidedown", true, true );
+                           }
+         });
+               return false;
+        })
+      });
+    </script>
+  </body>
+</html>
