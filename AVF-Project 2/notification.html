@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <!-- Change this if you want to allow scaling -->
+        <meta name="viewport" content="width=default-width; user-scalable=no" />
+        
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+            <title>Notification Demo</title>
+            <style>
+                body {margin:0;color:black; background:#073949; font-size: 100%}
+                header {background:#4B6678; width:100%; border: 1px solid black}
+                header h1,p {margin:20px; color:#00c3c3; text-shadow: 2px 1px 3px black}
+                header h2 {margin:20px}
+                td {color:white}
+                .phoneGapReady {color:cyan}
+                td .button {
+                    background-image: -webkit-gradient(linear, left top, left bottom, 
+                    from(#4286f5), 
+                    color-stop(0.5, #4286f5),
+                    color-stop(0.5, #194fdb),
+                    to(#194fdb));
+                    color: yellow;
+                    text-decoration: none;
+                    display: inline-block;
+                    padding: 4px 10px;
+                    -webkit-border-radius: 5px;
+                }
+
+            </style>
+            <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+            <script type="text/javascript" charset="utf-8">
+                
+                
+                function onBodyLoad()
+                {
+                    document.addEventListener("deviceready",onDeviceReady,false);
+                }
+                
+                /* When this function is called, PhoneGap has been initialized and is ready to roll */
+                function onDeviceReady()
+                {
+                    phoneGapReady.innerHTML = "PhoneGap is Ready";
+                    
+                }
+                
+                // alert dialog dismissed
+                function alertDismissed() {
+                    // do something
+                }
+                
+                // Show a custom alert
+                //
+                function showAlert() {
+                    navigator.notification.alert(
+                                                 'You pressed Alert!', // message
+                                                 alertDismissed, // callback
+                                                 'Alert Demo', // title
+                                                 'Done' // buttonName
+                                                 );
+                }
+                
+                // process the confirmation dialog result
+                function onConfirm(button) {
+                    alert('You selected button ' + button);
+                }
+                
+                // Show a custom confirmation dialog
+                //
+                function showConfirm() {
+                    navigator.notification.confirm(
+                                                   'You pressed Confirm!', // message
+                                                   onConfirm, // callback to invoke with index of button pressed
+                                                   'Confirm Demo', // title
+                                                   'Restart,Exit' // buttonLabels
+                                                   );
+                }
+                
+                function playBeep() {
+                    navigator.notification.beep(3);
+                }
+                
+                // Vibrate for 2 seconds
+                //
+                function vibrate() {
+                    navigator.notification.vibrate(2000);
+                    alert('vibrate does not work on Sim');
+                }
+                
+                
+                
+                </script>
+            </head>
+            <body onload="onBodyLoad()">
+
+			        <DIV>
+                        <header>
+                            <TABLE width="100%">
+                                <TR>
+                                    <TD>
+                                        <h2>Alert (Notification) Demo</h2>
+                                    </TD>
+                                    <TD align="right"><a href="index.html" class="button">back</a>
+                                    </TD>
+                                </TR>
+                                
+                            </TABLE>
+                        </header>
+			        </DIV>
+			        <DIV>
+
+			            <TABLE>
+			                <TR>
+			                    <TD>
+			                        <button onclick="showAlert();">Try Alert</button> <br>
+			                    </TD>
+			                </TR>
+			                <TR>
+			                    <TD>
+			                        <button onclick="showConfirm();">Try Confirm</button> <br>
+			                    </TD>
+			                </TR>
+                            <TR>
+                                <TD>
+                                    <button onclick="playBeep();">Play Beep</button> <br>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <button onclick="vibrate();">Vibrate</button> <br>
+                                </TD>
+                            </TR>
+                            <TR>
+			                    <TD id="results" >
+
+			                    </TD>
+			                </TR>
+
+			            </TABLE>
+			        </DIV>
+
+			        <DIV id="phoneGapReady" class="phoneGapReady">waiting for PhoneGap to initialize....</DIV>
+
+			    </body>
+			</html>

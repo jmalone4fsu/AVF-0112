@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- Change this if you want to allow scaling -->
+        <meta name="viewport" content="width=default-width; user-scalable=no" />
+        
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+            <title>Accelerometer Demo</title>
+            <style>
+            body {margin:0;color:black; background:#073949; font-size: 100%}
+            header {background:#4B6678; width:100%; border: 1px solid black}
+            header h1,p {margin:20px; color:#00c3c3; text-shadow: 2px 1px 3px black}
+            header h2 {margin:20px}
+            td {color:white}
+            .phoneGapReady {color:cyan}
+            td .button {
+                background-image: -webkit-gradient(linear, left top, left bottom, 
+                from(#4286f5), 
+                color-stop(0.5, #4286f5),
+                color-stop(0.5, #194fdb),
+                to(#194fdb));
+                    color: yellow;
+                    text-decoration: none;
+                    display: inline-block;
+                    padding: 4px 10px;
+                    -webkit-border-radius: 5px;
+                }
+            </style>
+            <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+            <script type="text/javascript" charset="utf-8">
+                
+                function onBodyLoad()
+                {
+                    document.addEventListener("deviceready",onDeviceReady,false);
+                }
+                
+                /* When this function is called, PhoneGap has been initialized */
+                function onDeviceReady()
+                {
+                    phoneGapReady.innerHTML = "PhoneGap is Ready";
+                }
+                
+                function getCurrentAcceleration() {
+                    navigator.accelerometer.getCurrentAcceleration(onAccelerationSuccess, onError);
+                }
+                
+                // onSuccess: Get current acceleration
+                //
+                function onAccelerationSuccess(acceleration) {
+                    currentAccelerationResult.innerHTML = 'Acceleration X: ' + acceleration.x + '<BR>' +
+                    'Acceleration Y: ' + acceleration.y + '<BR>' +
+                    'Acceleration Z: ' + acceleration.z + '<BR>' +
+                    'Timestamp: ' + acceleration.timestamp + '<BR>';
+                }
+                
+                
+                var watchId = -1;
+                var updates = 0;
+                
+                function startWatch() {
+                    
+                    // Update acceleration every 3 seconds
+                    var options = { frequency: 1000 };
+                    
+                    if (watchId == -1)
+                        watchID = navigator.accelerometer.watchAcceleration(onAccelerationWatchSuccess, onError, options);
+                }
+                
+                // Stop watching the acceleration
+                //
+                function stopWatch() {
+                    if (watchID > -1) {
+                        navigator.accelerometer.clearWatch(watchID);
+                        watchID = -1;
+                        updates = 0;
+                    }
+                }
+                
+                // onSuccess: Get current acceleration
+                //
+                function onAccelerationWatchSuccess(acceleration) {
+                    
+                    // alert("here!");
+                    updates++;
+                    watchResult.innerHTML = 'Acceleration X: ' + acceleration.x + '<BR>' +
+                    'Acceleration Y: ' + acceleration.y + '<BR>' +
+                    'Acceleration Z: ' + acceleration.z + '<BR>' +
+                    'Timestamp: ' + acceleration.timestamp + '<BR>' +
+                    'Update Number: ' + updates + '<BR>';
+                }
+                
+                
+                // onError: Failed to get the acceleration
+                //
+                function onError() {
+                    alert ("onError");
+                }
+                
+                
+            </script>
+        </head>
+    <body onload="onBodyLoad()">
+        
+        <DIV>
+            <header>
+            <TABLE width="100%">
+                <TR>
+                    <TD>
+                        <h2>Accelerometer Demo</h2>
+                    </TD>
+                    <TD align="right"><a href="index.html" class="button">back</a>
+                    </TD>
+                </TR>
+                
+            </TABLE>
+            </header>
+        </DIV>
+        <DIV>
+            
+            <TABLE>
+                <TR>
+                    <TD>
+                        <button onclick="getCurrentAcceleration();">Get Current Acceleration</button>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD id="currentAccelerationResult">
+                        
+                    </TD>
+                </TR>
+                
+                <TR>
+                    <TD>
+                        <button onclick="startWatch();">Start Watching</button>
+                        <button onclick="stopWatch();">Stop Watching</button>
+                        
+                    </TD>
+                </TR>
+                <TR>
+                    <TD id="watchResult">
+                        
+                    </TD>
+                </TR>
+                
+            </TABLE>
+        </DIV>
+        
+        <DIV id="phoneGapReady" class="phoneGapReady">waiting for PhoneGap to initialize....</DIV>
+        
+    </body>
+</html>
