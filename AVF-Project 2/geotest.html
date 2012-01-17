@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />        
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+            <title>Geolocation Demo</title>
+			<style>
+				body {margin:0;color:black; background:#073949; font-size: 100%}
+			    header {background:#4B6678; width:100%; border: 1px solid black}
+			    header h1,p {margin:20px; color:#00c3c3; text-shadow: 2px 1px 3px black}
+			    header h2 {margin:20px}
+			    td {color:white}
+			    .phoneGapReady {color:cyan}
+			    td .button {
+			    	background-image: -webkit-gradient(linear, left top, left bottom, 
+			       	from(#4286f5), 
+			       	color-stop(0.5, #4286f5),
+			       	color-stop(0.5, #194fdb),
+			       	to(#194fdb));
+			       	color: yellow;
+			       	text-decoration: none;
+			       	display: inline-block;
+			       	padding: 4px 10px;
+			       	-webkit-border-radius: 5px;
+				}
+			</style>
+			<script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+			<script type="text/javascript" charset="utf-8">
+                
+                
+                function onBodyLoad()
+                {
+                    document.addEventListener("deviceready",onDeviceReady,false);
+                }
+                
+                /* When this function is called, PhoneGap is ready */
+                function onDeviceReady()
+                {
+                    phoneGapReady.innerHTML = "PhoneGap is Ready";
+                    
+                }
+                
+                function getLocation() {
+                    try {
+                        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                    }
+                    catch (err)
+                    {
+                        alert(err);
+                    }
+                }
+                
+                // onSuccess Geolocation
+                //
+                function onSuccess(position) {
+                    var element = document.getElementById('geolocation');
+                    element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+                    'Longitude: ' + position.coords.longitude + '<br />' +
+                    'Altitude: ' + position.coords.altitude + '<br />' +
+                    'Accuracy: ' + position.coords.accuracy + '<br />' +
+                    'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br />' +
+                    'Heading: ' + position.coords.heading + '<br />' +
+                    'Speed: ' + position.coords.speed + '<br />' +
+                    'Timestamp: ' + new Date(position.timestamp) + '<br />';
+                }
+                
+                // onError Callback receives a PositionError object
+                //
+                function onError(error) {
+                    alert('code: ' + error.code + '\n' +
+                          'message: ' + error.message + '\n');
+                }
+
+                var watchID;
+                var updates = 0;
+                function startWatch() {
+                    // Update every 3 seconds
+                    var options = { frequency: 1000 };
+                    watchID = navigator.geolocation.watchPosition(onWatchSuccess, onError, options);
+                }
+                
+                // onSuccess Geolocation
+                //
+                function onWatchSuccess(position) {
+                    updates++;
+                    
+                    var element = document.getElementById('watchResult');
+                    element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+                    'Longitude: ' + position.coords.longitude + '<br /> updates: '+ updates +
+                    '<hr />';
+                }
+
+                
+                function stopWatch() {
+                    if (watchID != null) {
+                        navigator.geolocation.clearWatch(watchID);
+                        watchID = null;
+                        updates = 0;
+                    }
+                }
+
+                </script>
+            </head>
+    <body onload="onBodyLoad()">
+        
+        <DIV class="phoneGapAPITitle">
+            <header>
+            <TABLE width="100%">
+                <TR>
+                    <TD>
+                        <h2>GeoLocation API</h2>
+                    </TD>
+                    <TD align="right"><a href="index.html">back</a>
+                    </TD>
+                </TR>
+                
+            </TABLE>
+            </header>
+        </DIV>
+        <DIV>
+            
+            <TABLE>
+                <TR>
+                    <TD>
+                        <button onclick="getLocation();">Get Geolocation</button> <br>
+                    </TD>
+                </TR>
+                
+                    
+                <TR>
+                    <TD id="geolocation" >
+                        
+                    </TD>
+                </TR>
+                <TR>
+                    <TD>
+                        <button onclick="startWatch();">Start Watching</button>
+                        <button onclick="stopWatch();">Clear Watching</button>
+                        
+                    </TD>
+                </TR>
+                <TR>
+                    <TD id="watchResult">
+                        
+                    </TD>
+                </TR>
+            </TABLE>
+        </DIV>
+        
+        <DIV id="phoneGapReady">waiting for PhoneGap to initialize....</DIV>
+        
+    </body>
+</html>
