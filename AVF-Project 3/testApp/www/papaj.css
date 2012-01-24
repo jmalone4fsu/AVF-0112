@@ -1,0 +1,148 @@
+@charset "UTF-8";
+/* @Font Face */
+@font-face {
+	font-family: 'Colaborate-RegularRegular';
+	src: url('fonts/ColabReg-webfont.eot');
+	src: local('☺'), url('fonts/ColabReg-webfont.woff') format('woff'), url('fonts/ColabReg-webfont.ttf') format('truetype'), url('fonts/ColabReg-webfont.svg#webfont') format('svg')
+}
+@font-face {
+	font-family: 'HighlandGothicLightFLFRegular';
+	src: url('fonts/HighlandGothicLightFLF-webfont.eot');
+	src: local('☺'), url('fonts/HighlandGothicLightFLF-webfont.woff') format('woff'), url('fonts/HighlandGothicLightFLF-webfont.ttf') format('truetype'), url('fonts/HighlandGothicLightFLF-webfont.svg#webfont') format('svg')
+}
+/* Global */
+body {
+	margin: 0;
+	padding: 0; 
+	background: #008BA4; 
+	color: black
+}
+ul {
+	list-style: none; 
+	display: inline-block
+}
+li {
+	margin: 0 auto; 
+	float: left; 
+	padding-right: 3em; 
+	font-size: 1.4em; 
+	line-height: .5em
+}
+img.norm {
+	margin-left: .5em; 
+	margin-top: .5em;
+	float: left;
+	border: 2px solid black;
+	padding: .4em;
+	background: grey;
+	box-shadow: 3px 3px 4px #242424
+}
+h1 {padding-left: 20px; 
+	margin: 1em
+}
+h2 {margin: 1em}
+
+/* Banner */
+header[role="banner"] {
+	margin-top: 0; 
+	background: #4B6682;
+	width: 100%; 
+	padding: .3em; 
+	line-height: .5em;
+	border-bottom: 3px solid black
+}
+/* Banner Headers */
+header[role="banner"] h1 {
+	padding-left: 2.5em;
+	font: 40px/54px HighlandGothicLightFLFRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #970000;
+	text-shadow: -1px -1px 0 #650000, 0 0 10px rgba(255,255,255,0.7)
+}
+header[role="banner"] h2 {
+	padding-left:5.5em; margin-left:5em;
+	margin-top:-3em;
+	font: 14px/20px Colaborate-RegularRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #eee;
+}
+/* Navigation */
+nav[role="navigation"] {
+	height:55px; 
+	width:100%; 
+	background-color: #970000;
+	background-image: -moz-linear-gradient(top, #ca0000, #970000);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ca0000),color-stop(1, #970000));
+	box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b, inset 0 35px 35px -18px #ca0000;
+		-moz-box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b;
+		-webkit-box-shadow: 0 0 20px #446b6b
+}
+/* Nav Images */
+nav[role="navigation"] img {
+	margin:0; 
+	padding-right:3px
+}
+/* Nav Links */
+nav[role="navigation"] a, nav[role="navigation"] li {
+	color:#33CCFF; 
+	font: 18px Colaborate-RegularRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+/* Main Sections */
+section[role="main"] {
+	background: #ebe6cd; 
+	width: 95%;
+	margin: .75em auto;
+	border: 2px solid black
+}
+/* First Section & Links */
+section[role="main"].first {margin-top: 2.5em}
+section[role="main"] a {color: #970000}
+section[role="main"] a:visited {color: blue}
+section[role="main"] li {
+	list-style: none; 
+	display: block; 
+	width: 4.3em; 
+	text-align: center; 
+	color: #970000
+}
+/* Main Section Headers */
+section[role="main"] h1 {
+	color: #eee;
+	line-height: 1.5em;
+	margin-bottom: 15px;
+	background-color: #0081ac;
+	box-shadow: inset 0 -35px 35px -18px #005b79;
+	background-image: -moz-linear-gradient(top, #0081ac, #005b79);
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #0081ac),color-stop(1, #005b79));
+}
+
+/* Site Gravy */
+nav[role="navigation"], section[role="main"], section[role="main"] h1 {
+	border-radius: 20px;
+		-moz-border-radius: 20px;
+		-webkit-border-radius: 20px; 
+	box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b, inset 0 35px 35px -18px #ca0000;
+		-moz-box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b;
+		-webkit-box-shadow: 0 0 20px #446b6b
+}
+/* Footer */
+footer[role="contentinfo"] {
+	background:black; 
+	color:white;
+	text-align:center
+}
+button {
+	font-size:1em;
+	background-color: #3cf; 
+	width:50%; 
+	height:3em;
+	border-radius: 20px;
+		-moz-border-radius: 20px;
+		-webkit-border-radius: 20px; 
+	box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b, inset 0 35px 35px -18px #ca0000;
+		-moz-box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b;
+		-webkit-box-shadow: 0 0 20px #446b6b
+}
+
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+}

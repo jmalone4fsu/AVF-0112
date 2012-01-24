@@ -4,43 +4,7 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />        
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
             <title>Geolocation Demo</title>
-			<style>
-			    body {margin:0;padding:0; background:#073949; color:black}
-				ul {list-style:none; display:inline-block}
-				li {margin:0 auto; float:left; padding-right:3em; font-size:1.4em; line-height:.5em}
-				img {margin-left:.5em; margin-top:.5em;float:left;border:2px solid black;padding:.4em;background:grey;box-shadow:3px 3px 4px #242424}
-				h1 {margin:1em}
-				header[role="banner"] h1 {padding-left:3.5em}
-				header[role="banner"] h2 {padding-left:5em}
-				section[role="main"] h2 {font-size:large; padding:1em}
-				h2 {margin:1em}
-				#line p {background:black;color:#073949;margin:0;line-height:.2em}
-				aside {disply: table-cell;float:right;width:30%; background:darkgrey}
-				header[role="banner"] {margin-top:0; background:#4B6678;width:100%; padding:.3em; line-height:.5em;border-bottom:3px solid black}
-				section[role="main"] {background:#4B6678; width:95%;margin:3em auto;align:center; border:2px solid black}
-				section[role="main"] p:last-child {margin-bottom:1em}
-				section[role="main"] li {list-style:none; display:block; width:4.3em; text-align:center}
-				section[role="main"] h1 {background:grey; width:95%; height:1.5em; margin:.4em auto; align:center; border:1px solid black;padding:.5em}
-				nav[role="navigation"] {margin:0; width:100%; background:grey; color:grey; text-shadow:1px 1px 2px #a2a2a2}
-				footer[role="contentinfo"] {background:black; color:white;text-align:center}
-			    div {color:white}
-			    .phoneGapReady {color:cyan}
-			
-			    button {font-size:1em; width:50%; height:3em}
-			    p .button {
-			    	background-image: -webkit-gradient(linear, left top, left bottom, 
-			       	from(#4286f5), 
-			       	color-stop(0.5, #4286f5),
-			       	color-stop(0.5, #194fdb),
-			       	to(#194fdb));
-			       	color: yellow;
-			       	text-decoration: none;
-			       	display: inline-block;
-				margin-right:2em;
-			       	padding: 4px 10px;
-			       	-webkit-border-radius: 5px;
-				}
-			</style>
+			<link href="papaj.css" rel="stylesheet" />
 			<script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
 			<script type="text/javascript" charset="utf-8">
                 
@@ -120,16 +84,17 @@
             </head>
     <body onload="onBodyLoad()">
         <header role="banner">
-		<img src="images/imagekapa.jpg" alt="picture of Joe Malone" width="110">
-		<h1>aka Papa J - Showcase</h1>
-                <h2>Geolocation Demo</h2>
-                <p align="right"><a href="index.html" class="button">back</a></p>
-        </header>
-	<nav role="navigation">
-		<ul>
-			<li>aka Papa J</li>
-		</ul>
-	</nav>
+			<img class="norm" src="http://img405.imageshack.us/img405/6349/imagekapa.jpg" alt="picture of Joe Malone" width="110">
+
+			<h1>aka Papa J Showcase<h1>
+			<h2>Joe Malone * Full Sail * Mobile Development</h2>
+
+		</header>
+		<nav role="navigation">
+			<ul>
+				<li>AVF-0112 * Geolocation Demo</li>
+			</ul>
+		</nav>
       
         <section role="main">
         	<p align="center"><button onclick="getLocation();">Get Geolocation</button> </p>
@@ -143,7 +108,8 @@
                     
         </section>
         <footer role="contentinfo">
-        <DIV id="phoneGapReady">waiting for PhoneGap to initialize....</DIV>
+			<p><a href="index.html">Home Page</a></p>
+            <div id="phoneGapReady">waiting for PhoneGap to initialize....</div>
         </footer>
     </body>
 </html>
