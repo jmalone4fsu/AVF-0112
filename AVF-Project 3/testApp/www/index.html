@@ -4,6 +4,54 @@
 	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 	<title>aka Papa J Showcase</title>
 	<link rel="stylesheet" type="text/css" href="papaj.css" />
+	<style>
+	figure {margin:0}
+	figcaption {color:red; 
+		text-align:center; 
+		line-height:2em;
+	}
+	@media only screen and (max-width: 768px) {
+		header[role="banner"] h1 {
+			padding-left: 4em;
+			font: 30px/44px HighlandGothicLightFLFRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+		}
+		header[role="banner"] h2 {
+			padding-left: 6em;
+		}
+		nav[role="navigation"] {
+			height:50px;
+			padding-bottom:5px;
+		}
+		nav[role="navigation"] a, nav[role="navigation"] li {
+			float:none;
+			margin-top:-5px;
+			padding-right:1em;
+			color:#33CCFF; 
+			font: 14px Colaborate-RegularRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+		}
+	}
+	@media only screen and (max-width: 420px) {
+		header[role="banner"] h1 {
+			padding-left: 4em;
+			font: 30px/44px HighlandGothicLightFLFRegular, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+			color: #970000;
+			text-shadow: -1px -1px 0 #650000, 0 0 10px rgba(255,255,255,0.7)
+		}
+		nav[role="navigation"] a, nav[role="navigation"] li {
+			text-align:right;
+			margin:-16px auto;
+			float:right;
+			padding-bottom:;
+			display:block;
+		}
+		nav[role="navigation"] {
+			height:50px;padding:0;
+		}
+		nav[role="navigation"] img {
+		   display:none;
+		}
+	}
+	</style>
 </head>
 <body>
 	<header role="banner">
@@ -20,41 +68,65 @@
 	<section role="main" class="first">
 		<h1>CRUD APP</h1>
 		<ul>
-			<li><img class="norm" src="images/oldcrud.jpg" width="65" alt="old app"></li>
-			<li><img class="norm" src="images/birthdayicon.png" width="65" alt="new app"></li>
-		</ul>
-		<br/>
-		<ul>
-			<li>Original</li>
-			<li>New Crud</li>
+			<li>
+				<figure><a href="#">
+					<img class="norm" src="images/oldcrud.jpg" width="65" alt="old app">
+					<figcaption>Original</figcaption></a>
+				</figure>
+			</li>	
+			<li>
+				<figure><a href="#">
+					<img class="norm" src="images/birthdayicon.png" width="65" alt="new app">
+					<figcaption>New Crud</figcaption></a>
+				</figure>
+			</li>
 		</ul>
 	</section>
 	<section role="main">
 		<h1>Native Features - Pt1</h1>
 		<ul>
-			<li><a href="test-accel.html"><img class="norm" src="images/imageccm.png" width="65" alt="accelerometer icon"></a></li>
-			<li><a href="geotest.html"><img class="norm" src="images/imagecmz.png" width="65" alt="geolocation icon"></a></li>
-			<li><a href="notification.html"><img class="norm" src="images/image200.png" width="65" alt="notification icon"></a></li>
+			<li>
+				<figure><a href="test-accel.html">
+					<img class="norm" src="images/imageccm.png" width="65" alt="accelerometer icon">
+					<figcaption>Accelerometer</figcaption>
+				</a></figure>
+			</li>
+			<li>
+				<figure><a href="geotest.html">
+					<img class="norm" src="images/imagecmz.png" width="65" alt="geolocation icon">
+					<figcaption>Geolocation</figcaption>
+				</a></figure>
+			</li>
+			<li>
+				<figure><a href="notification.html">
+					<img class="norm" src="images/image200.png" width="65" alt="notification icon">
+					<figcaption>Notification</figcaption>
+				</a></figure>
+			</li>
 		</ul>
 		</br>
-		<ul>
-			<li>Accelerometer</li>
-			<li>Geolocation</li>
-			<li>Notification</li>
-		</ul>
 	</section>
 	<section role="main">
 		<h1>Native Features - Pt2</h1>
 		<ul>
-			<li><a href="network.html"><img class="norm" src="images/network.png" width="65" alt="network icon"></a></li>
-			<li><a href="compass.html"><img class="norm" src="images/compass2.png" width="65" alt="compass icon"></a></li>
-			<li><a href="media.html"><img class="norm" src="images/media.png" width="65" alt="media icon"></a></li>
-		</ul>
-		</br>
-		<ul>
-			<li>Network</li>
-			<li>Compass</li>
-			<li>Media</li>
+			<li>
+				<figure><a href="network.html">
+					<img class="norm" src="images/network.png" width="65" alt="network icon">
+					<figcaption>Network</figcaption>
+				</a></figure>
+			</li>
+			<li>
+				<figure><a href="compass.html">
+					<img class="norm" src="images/compass2.png" width="65" alt="compass icon">
+					<figcaption>Compass</figcaption>
+				</a></figure>
+			</li>
+			<li>
+				<figure><a href="media.html">
+					<img class="norm" src="images/media.png" width="65" alt="media icon">
+					<figcaption>Media</figcaption></a>
+				</figure>
+			</li>
 		</ul>
 	</section>
 	<section role="main">
