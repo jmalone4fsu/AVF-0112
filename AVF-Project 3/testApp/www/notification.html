@@ -6,7 +6,21 @@
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
             <title>Notification Demo</title>
 			<link href="papaj.css" rel="stylesheet" />
-			
+			<style>
+				button {
+					font-size:1em;
+					background-color: #3cf; 
+					width:50%; 
+					height:3em;
+					border-radius: 20px;
+						-moz-border-radius: 20px;
+						-webkit-border-radius: 20px; 
+					box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b, inset 0 35px 35px -18px #ca0000;
+						-moz-box-shadow: inset 0 0 15px #900, 0 0 20px #446b6b;
+						-webkit-box-shadow: 0 0 20px #446b6b
+					}
+							
+			</style>
             <script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
             <script type="text/javascript" charset="utf-8">
                 
@@ -71,29 +85,28 @@
                 </script>
             </head>
             <body onload="onBodyLoad()">
-            	<header role="banner">
-					<img class="norm" src="http://img405.imageshack.us/img405/6349/imagekapa.jpg" alt="picture of Joe Malone" width="110">
+            <header role="banner">
+				<img class="norm" src="images/imagekapa.jpg" alt="picture of Joe Malone" width="110">
 
-					<h1>aka Papa J Showcase<h1>
-					<h2>Joe Malone * Full Sail * Mobile Development</h2>
+				<h1>aka Papa J Showcase<h1>
+				<h2>Joe Malone * Full Sail * Mobile Development</h2>
 
-				</header>
-				<nav role="navigation">
-					<ul>
-						<li>AVF-0112 * Notification Demo</li>
-					</ul>
-				</nav>
-				<section role="main">
-					<h1>Try out each type of alert</h1>
-					
-			    	<p align="center"><button onclick="showAlert();">Try Alert</button></p>
-			    	<p align="center"><button onclick="showConfirm();">Try Confirm</button></p>
-			    	<p align="center"><button onclick="playBeep();">Play Beep</button></p>
-            		<p align="center"><button onclick="vibrate();">Vibrate</button></p>
-				</section>
-				<footer role="contentinfo">
-					<p><a href="index.html">Home Page</a></p>
-			    	<p id="phoneGapReady" class="phoneGapReady">waiting for PhoneGap to initialize....</p>
-				</footer>
-	   		</body>
+			</header>
+			<nav role="navigation">
+				<ul>
+					<li>AVF-0112 * Alert (Notification) Demo</li>
+				</ul>
+			</nav>
+			<section role="main">
+				<h1>Try out each type of alert.</h1>
+			    <p align="center"><button onclick="showAlert();">Try Alert</button></p>
+			    <p align="center"><button onclick="showConfirm();">Try Confirm</button></p>
+			    <p align="center"><button onclick="playBeep();">Play Beep</button></p>
+                <p align="center"><button onclick="vibrate();">Vibrate</button></p>
+			</section>
+			<footer role="contentinfo">
+				<p><a href="index.html">Home Page</a></p>
+			    <p id="phoneGapReady" class="phoneGapReady">waiting for PhoneGap to initialize....</p>
+			</footer>
+	   </body>
 </html>

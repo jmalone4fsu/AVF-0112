@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+
+          <meta name="viewport" content="width=device-width; height=device-height; user-scalable=no" />
+
+          <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+          <title>Beer Me</title>
+          <link href="papaj.css" rel="stylesheet" />		  
+          <style>
+                
+		  </style>
+          <script type="text/javascript" src="phonegap-1.3.0.js"></script>
+
+          <script type="text/javascript">
+
+               function loader() {
+
+                    var state = document.readyState;
+
+                    if (state == 'loaded' || state == 'complete') {
+
+                         run();
+
+                    } else {
+
+                         if (navigator.userAgent.indexOf('Browzr') > -1) {
+
+                              setTimeout(run, 250);
+
+                         } else {
+
+                              document.addEventListener('deviceready',run,false);
+
+                         }
+
+                    }
+
+               }
+
+               function run() {
+                    var win = function(position) {                          // Grab coordinates object from the Position object passed into success callback.
+                         var coords = position.coords;
+                         // Call for static google maps data - make sure you use your own Google Maps API key!
+                         var url = "http://maps.google.com/maps/api/staticmap?sensor=false&center=" + coords.latitude + "," + coords.longitude + "&zoom=14&size=300x300&markers=color:blue|label:X|" + coords.latitude + ',' + coords.longitude;
+                        document.getElementById('map').setAttribute('src',url);
+                    };
+                    var fail = function(e) {
+                         alert('Can\'t retrieve position.\nError: ' + e);
+                    };
+                    navigator.geolocation.getCurrentPosition(win, fail);
+               } 
+
+          </script>
+
+     </head>
+
+     <body onload="loader();">
+         <header role="banner">
+             <img class="norm" src="images/imagekapa.jpg" alt="picture of Joe Malone" width="110">
+                 
+                 <h1>aka Papa J Showcase<h1>
+                     <h2>Joe Malone * Full Sail * Mobile Development</h2>
+                     
+                     </header>
+         <nav role="navigation">
+             <ul>
+                 <li>AVF-0112 * Media Demo</li>
+             </ul>
+         </nav>
+         <section role="main">
+             <h1>You Are Here</h1>
+             <div align="center"><img id="map" /></div>
+         </section>
+         <footer role="contentinfo">
+             <p><a href="index.html">Home Page</a></p>
+         </footer>
+     </body>
+
+</html>
